@@ -9,6 +9,10 @@ const template = /\d/g;
 
 let soDot = 3;
 let ran = [];
+let tail = {
+    x: 0,
+    y: 0
+};
 let baitCoordinate = {
     x: 0,
     y: 0
@@ -36,6 +40,11 @@ const convert = (value) => {
 let step = 2;
 
 const move = (direct) => {
+    tail = {
+        x: convert(ran[ran.length-1].style.left),
+        y: convert(ran[ran.length-1].style.top)
+    }
+
     let newX, newY;
     for (let i = ran.length - 1; i >= 1; i--) {
         ran[i].style.left = ran[i - 1].style.left;
@@ -87,6 +96,7 @@ const eat = () => {
     let y = convert(ran[0].style.top);
 
     if (x === baitCoordinate.x && y === baitCoordinate.y) {
+        ran.push(createNode(tail.x, tail.y));
         displayBait();
     }
 }
@@ -114,6 +124,7 @@ const call = (e) => {
 };
 
 body.addEventListener('keyup', call);
+
 
 let play = setInterval(() => {
     move(direct);

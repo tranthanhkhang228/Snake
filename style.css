@@ -28,6 +28,7 @@
     width           : 2rem;
     height          : 2rem;
     background-color: red;
+    transition: all 0.5s;
 }
 
 .bait {
