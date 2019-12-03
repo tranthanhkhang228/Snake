@@ -8,9 +8,19 @@
 .game-frame {
     margin  : 10rem auto;
     border  : 2px solid black;
-    width   : 50rem;
-    height  : 50rem;
+    width   : 54rem;
+    height  : 54rem;
     position: relative;
+}
+
+.game-frame__wall {
+    border   : 2px solid green;
+    width    : 50rem;
+    height   : 50rem;
+    position : absolute;
+    top      : 50%;
+    left     : 50%;
+    transform: translate(-50%, -50%);
 }
 
 .snake {
@@ -20,8 +30,9 @@
     background-color: red;
 }
 
-.username {
-    width : 200px;
-    height: 30px;
-    border: 2px solid red;
+.bait {
+    position        : absolute;
+    width           : 2rem;
+    height          : 2rem;
+    background-color: red;
 }
