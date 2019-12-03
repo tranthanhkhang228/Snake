@@ -1,21 +1,27 @@
 :root {
-    margin: 0;
-    padding: 0;
+    margin    : 0;
+    padding   : 0;
     box-sizing: border-box;
-    font-size: 62.5%;
+    font-size : 62.5%;
 }
 
 .game-frame {
-    margin: 10rem auto;
-    border: 2px solid black;
-    width: 50rem;
-    height: 50rem;
+    margin  : 10rem auto;
+    border  : 2px solid black;
+    width   : 50rem;
+    height  : 50rem;
     position: relative;
 }
 
 .snake {
-    position: absolute;
-    width: 2rem;
-    height: 2rem;
+    position        : absolute;
+    width           : 2rem;
+    height          : 2rem;
     background-color: red;
+}
+
+.username {
+    width : 200px;
+    height: 30px;
+    border: 2px solid red;
 }

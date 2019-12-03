@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const gameFrame = document.querySelector('.game-frame');
 
 const template = /\d/g;
@@ -55,14 +56,38 @@ const move = (direct) => {
 let checkHead = () => {
     let x = convert(ran[0].style.left);
     let y = convert(ran[0].style.top);
-    if ( x <= 0 | x >= 50 | y <= 0 | y >= 50 ) {
+    if (x < 0 | x > 48 | y < 0 | y > 48) {
         clearInterval(play);
     }
 }
 
+
+
 initialize();
 
+let direct = 'UP';
+
+body.addEventListener('keyup', e => {
+    switch (e.keyCode) {
+        case 37:
+            direct = 'LEFT';
+            break;
+        case 38:
+            direct = 'UP';
+            break;
+        case 39:
+            direct = 'RIGHT';
+            break;
+        case 40:
+            direct = 'DOWN';
+            break;
+    };
+})
+
 let play = setInterval(() => {
-    move('RIGHT');
+    move(direct);
     checkHead();
-}, 500);
+}, 200);
+
+
+
