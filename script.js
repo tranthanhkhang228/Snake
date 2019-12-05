@@ -11,7 +11,8 @@ gameFrame.append(bait);
 let snake = [];
 let tail = {
     x: 0,
-    y: 0
+    y: 0,
+    border: ''
 };
 let baitCoordinate = {
     x: 0,
@@ -49,10 +50,11 @@ let step = 2;
 
 // snake moves
 const move = (direct) => {
-    //save the coordinate of snake's tail
+    //save the information of snake's tail
     tail = {
         x: convert(snake[snake.length - 1].style.left),
-        y: convert(snake[snake.length - 1].style.top)
+        y: convert(snake[snake.length - 1].style.top),
+        border: snake[snake.length - 1].style.borderRadius
     }
 
     // move snake's tail to the right by 1 unit
@@ -61,23 +63,10 @@ const move = (direct) => {
 
     // move the elements of the Snake to the right by 1 unit
     for (let i = snake.length - 2; i >= 1; i--) {
+        snake[i].style.borderRadius = snake[i - 1].style.borderRadius;
 
         snake[i].style.left = snake[i - 1].style.left;
         snake[i].style.top = snake[i - 1].style.top;
-
-        snake[i].style.borderRadius = '1rem 1rem 1rem 1rem';
-        // // add style for snake's body
-        // if (convert(snake[i].style.left) < convert(snake[i - 1].style.left) && convert(snake[i].style.top) < convert(snake[i + 1].style.top)) {
-        //     snake[i].style.borderRadius = '1rem 0 0 0';
-        // } else if (convert(snake[i].style.left) > convert(snake[i + 1].style.left) && convert(snake[i].style.top) < convert(snake[i - 1].style.top)) {
-        //     snake[i].style.borderRadius = '0 1rem 0 0';
-        // } else if (convert(snake[i].style.left) > convert(snake[i - 1].style.left) && convert(snake[i].style.top) > convert(snake[i + 1].style.top)) {
-        //     snake[i].style.borderRadius = '0 0 1rem 0';
-        // } else if (convert(snake[i].style.left) < convert(snake[i + 1].style.left) && convert(snake[i].style.top) > convert(snake[i - 1].style.top)) {
-        //     snake[i].style.borderRadius = '0 0 0 1rem';
-        // } else {
-        //     // snake[i].style.borderRadius = '0';
-        // }
     }
 
     // add style for snake's tail
@@ -103,21 +92,74 @@ const move = (direct) => {
             snake[0].style.top = `${newY}rem`;
             // set style for snake's head
             snake[0].style.borderRadius = '1rem 1rem 0 0';
+
+            //set style body when snake veer off
+            if (directN === 39) {
+                //right veer off the top
+                snake[1].style.borderRadius = '0 0 2rem 0';
+            }
+            else if (directN === 37) {
+                //left veer off the top
+                snake[1].style.borderRadius = '0 0 0 2rem';
+            } else {
+                snake[1].style.borderRadius = '0';
+            }
+
+            directN = 38;
             break;
         case 'DOWN':
             newY = convert(snake[0].style.top) + step;
             snake[0].style.top = `${newY}rem`;
             snake[0].style.borderRadius = '0 0 1rem 1rem';
+
+            if (directN === 39) {
+                //right veer off the bottom
+                snake[1].style.borderRadius = '0 2rem 0 0';
+            }
+            else if (directN === 37) {
+                //left veer off the bottom
+                snake[1].style.borderRadius = '2rem 0 0 0';
+            } else {
+                snake[1].style.borderRadius = '0';
+            }
+
+            directN = 40;
             break;
         case 'LEFT':
             newX = convert(snake[0].style.left) - step;
             snake[0].style.left = `${newX}rem`;
             snake[0].style.borderRadius = '1rem 0 0 1rem';
+
+            if (directN === 38) {
+                //top veer off the left
+                snake[1].style.borderRadius = '0 2rem 0 0';
+            }
+            else if (directN === 40) {
+                //bottom veer off the left
+                snake[1].style.borderRadius = '0 0 2rem 0';
+            } else {
+                snake[1].style.borderRadius = '0';
+            }
+
+            directN = 37;
             break;
         case 'RIGHT':
             newX = convert(snake[0].style.left) + step;
             snake[0].style.left = `${newX}rem`;
             snake[0].style.borderRadius = '0 1rem 1rem 0';
+
+            if (directN === 38) {
+                //top veer off the right
+                snake[1].style.borderRadius = '2rem 0 0 0';
+            }
+            else if (directN === 40) {
+                //bottom veer off the left
+                snake[1].style.borderRadius = '0 0 0 2rem';
+            } else {
+                snake[1].style.borderRadius = '0';
+            }
+
+            directN = 39;
             break;
     }
 }
@@ -155,6 +197,9 @@ const eat = () => {
         // reset style of the tail before
         snake[snake.length - 2].style.borderRadius = '0';
 
+        // add border radius of the old tail for the new tail
+        snake[snake.length - 1].style.borderRadius = tail.border;
+
         displayBait();
     }
 }
@@ -165,19 +210,15 @@ const call = (e) => {
         e.keyCode !== directN) {
         switch (e.keyCode) {
             case 37:
-                directN = e.keyCode;
                 direct = 'LEFT';
                 break;
             case 38:
-                directN = e.keyCode;
                 direct = 'UP';
                 break;
             case 39:
-                directN = e.keyCode;
                 direct = 'RIGHT';
                 break;
             case 40:
-                directN = e.keyCode;
                 direct = 'DOWN';
                 break;
         };
@@ -200,7 +241,7 @@ btnStart.addEventListener('click', e => {
         move(direct);
         checkHead();
         eat();
-    }, 100);
+    }, 140);
 });
 
 
