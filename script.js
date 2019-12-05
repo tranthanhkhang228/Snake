@@ -3,10 +3,8 @@ const gameFrame = document.querySelector('.game-frame');
 const btnStart = document.querySelector('.game-frame__start');
 const popup = document.querySelector('.game-frame__pop-up');
 
-const bait = document.createElement('div');
-bait.setAttribute('class', 'bait');
+const bait = document.querySelector('.bait');
 bait.setAttribute('class', 'bait -display-none');
-gameFrame.append(bait);
 
 let snake = [];
 let tail = {
@@ -69,19 +67,32 @@ const move = (direct) => {
         snake[i].style.top = snake[i - 1].style.top;
     }
 
+    // shadow for snake's body
+    for(let i = snake.length - 2; i >= 1; i--) {
+        if(convert(snake[i].style.top) == convert(snake[i-1].style.top) && convert(snake[i].style.top) == convert(snake[i+1].style.top)) {
+            snake[i].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
+        } else {
+            snake[i].style.borderBottom = 'none';
+        }
+    }
+
     // add style for snake's tail
     let check = convert(snake[snake.length - 1].style.left) - convert(snake[snake.length - 2].style.left);
     if (check === 0) {
         check = convert(snake[snake.length - 1].style.top) - convert(snake[snake.length - 2].style.top);
         if (check > 0) {
             snake[snake.length - 1].style.borderRadius = '0 0 1rem 1rem';
+            snake[snake.length - 1].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
         } else {
             snake[snake.length - 1].style.borderRadius = '1rem 1rem 0 0';
+            snake[snake.length - 1].style.borderBottom = 'none';
         }
     } else if (check > 0) {
         snake[snake.length - 1].style.borderRadius = '0 1rem 1rem 0';
+        snake[snake.length - 1].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
     } else {
         snake[snake.length - 1].style.borderRadius = '1rem 0 0 1rem';
+        snake[snake.length - 1].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
     }
 
     // assign a new coordinate of snake's head
@@ -92,6 +103,7 @@ const move = (direct) => {
             snake[0].style.top = `${newY}rem`;
             // set style for snake's head
             snake[0].style.borderRadius = '1rem 1rem 0 0';
+            snake[0].style.borderBottom = 'none';
 
             //set style body when snake veer off
             if (directN === 39) {
@@ -101,6 +113,7 @@ const move = (direct) => {
             else if (directN === 37) {
                 //left veer off the top
                 snake[1].style.borderRadius = '0 0 0 2rem';
+
             } else {
                 snake[1].style.borderRadius = '0';
             }
@@ -111,6 +124,7 @@ const move = (direct) => {
             newY = convert(snake[0].style.top) + step;
             snake[0].style.top = `${newY}rem`;
             snake[0].style.borderRadius = '0 0 1rem 1rem';
+            snake[0].style.borderBottom = 'none';
 
             if (directN === 39) {
                 //right veer off the bottom
@@ -129,6 +143,7 @@ const move = (direct) => {
             newX = convert(snake[0].style.left) - step;
             snake[0].style.left = `${newX}rem`;
             snake[0].style.borderRadius = '1rem 0 0 1rem';
+            snake[0].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
 
             if (directN === 38) {
                 //top veer off the left
@@ -147,6 +162,7 @@ const move = (direct) => {
             newX = convert(snake[0].style.left) + step;
             snake[0].style.left = `${newX}rem`;
             snake[0].style.borderRadius = '0 1rem 1rem 0';
+            snake[0].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
 
             if (directN === 38) {
                 //top veer off the right
