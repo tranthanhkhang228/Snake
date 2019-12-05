@@ -41,8 +41,8 @@ let step = 2;
 
 const move = (direct) => {
     tail = {
-        x: convert(ran[ran.length-1].style.left),
-        y: convert(ran[ran.length-1].style.top)
+        x: convert(ran[ran.length - 1].style.left),
+        y: convert(ran[ran.length - 1].style.top)
     }
 
     let newX, newY;
@@ -50,22 +50,44 @@ const move = (direct) => {
         ran[i].style.left = ran[i - 1].style.left;
         ran[i].style.top = ran[i - 1].style.top;
     }
+
+
+
+
+    let check = convert(ran[ran.length - 1].style.left) - convert(ran[ran.length - 2].style.left);
+    if (check === 0) {
+        check = convert(ran[ran.length - 1].style.top) - convert(ran[ran.length - 2].style.top);
+        if (check > 0) {
+            ran[ran.length - 1].style.borderRadius = '0 0 1rem 1rem';
+        } else {
+            ran[ran.length - 1].style.borderRadius = '1rem 1rem 0 0';
+        }
+    } else if (check > 0) {
+        ran[ran.length - 1].style.borderRadius = '0 1rem 1rem 0';
+    } else {
+        ran[ran.length - 1].style.borderRadius = '1rem 0 0 1rem';
+    }
+
     switch (direct) {
         case 'UP':
             newY = convert(ran[0].style.top) - step;
             ran[0].style.top = `${newY}rem`;
+            ran[0].style.borderRadius = '1rem 1rem 0 0';
             break;
         case 'DOWN':
             newY = convert(ran[0].style.top) + step;
             ran[0].style.top = `${newY}rem`;
+            ran[0].style.borderRadius = '0 0 1rem 1rem';
             break;
         case 'LEFT':
             newX = convert(ran[0].style.left) - step;
             ran[0].style.left = `${newX}rem`;
+            ran[0].style.borderRadius = '1rem 0 0 1rem';
             break;
         case 'RIGHT':
             newX = convert(ran[0].style.left) + step;
             ran[0].style.left = `${newX}rem`;
+            ran[0].style.borderRadius = '0 1rem 1rem 0';
             break;
     }
 }
@@ -83,7 +105,7 @@ let checkHead = () => {
 const displayBait = () => {
     const x = Math.floor(Math.random() * 48) + 2;
     const y = Math.floor(Math.random() * 48) + 2;
-    
+
     baitCoordinate.x = (x % 2 === 0) ? x : x - 1;
     baitCoordinate.y = (y % 2 === 0) ? y : y - 1;
 
@@ -97,6 +119,10 @@ const eat = () => {
 
     if (x === baitCoordinate.x && y === baitCoordinate.y) {
         ran.push(createNode(tail.x, tail.y));
+
+        // reset style of the tail before
+        ran[ran.length - 2].style.borderRadius = '0';
+
         displayBait();
     }
 }
@@ -105,22 +131,31 @@ initialize();
 displayBait();
 
 let direct = 'UP';
+let directN = 38;
 
 const call = (e) => {
-    switch (e.keyCode) {
-        case 37:
-            direct = 'LEFT';
-            break;
-        case 38:
-            direct = 'UP';
-            break;
-        case 39:
-            direct = 'RIGHT';
-            break;
-        case 40:
-            direct = 'DOWN';
-            break;
-    };
+    if (((e.keyCode === 37 && directN !== 39) | (e.keyCode === 39 && directN !== 37) |
+        (e.keyCode === 38 && directN !== 40) | (e.keyCode === 40 && directN !== 38)) &&
+        e.keyCode !== directN) {
+        switch (e.keyCode) {
+            case 37:
+                directN = e.keyCode;
+                direct = 'LEFT';
+                break;
+            case 38:
+                directN = e.keyCode;
+                direct = 'UP';
+                break;
+            case 39:
+                directN = e.keyCode;
+                direct = 'RIGHT';
+                break;
+            case 40:
+                directN = e.keyCode;
+                direct = 'DOWN';
+                break;
+        };
+    }
 };
 
 body.addEventListener('keyup', call);
@@ -130,7 +165,7 @@ let play = setInterval(() => {
     move(direct);
     checkHead();
     eat();
-}, 200);
+}, 100);
 
 
 

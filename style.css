@@ -28,7 +28,11 @@
     width           : 2rem;
     height          : 2rem;
     background-color: red;
-    transition: all 0.5s;
+    /* transition: all 0.5s; */
+}
+
+.head {
+    border-radius: 999px;
 }
 
 .bait {
@@ -36,4 +40,20 @@
     width           : 2rem;
     height          : 2rem;
     background-color: red;
+}
+
+.top {
+    border-radius: 1rem 1rem 0 0;
+}
+
+.right {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.left {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.bottom {
+    border-radius: 0 0 1rem 1rem;
 }
