@@ -77,7 +77,7 @@ class Game {
         }
 
         // shadow for snake's body
-        styleSnakeBody(this.snake);
+        // styleSnakeBody(this.snake);
 
         // add style for snake's tail
         styleSnakeTail(this.snake[this.snake.length - 1], this.snake[this.snake.length - 2]);

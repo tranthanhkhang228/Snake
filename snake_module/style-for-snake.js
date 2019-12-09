@@ -7,7 +7,6 @@ const styleSnakeHead = (head, neck, direct, directN) => {
         case 'UP':
             // set style for snake's head
             head.style.borderRadius = '1rem 1rem 0 0';
-            head.style.borderBottom = 'none';
 
             //set style for snake's neck when snake veer off
             if (directN === 39) {
@@ -24,7 +23,6 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             break;
         case 'DOWN':
             head.style.borderRadius = '0 0 1rem 1rem';
-            head.style.borderBottom = 'none';
 
             if (directN === 39) {
                 //right veer off the bottom
@@ -39,7 +37,6 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             break;
         case 'LEFT':
             head.style.borderRadius = '1rem 0 0 1rem';
-            head.style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
 
             if (directN === 38) {
                 //top veer off the left
@@ -54,7 +51,6 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             break;
         case 'RIGHT':
             head.style.borderRadius = '0 1rem 1rem 0';
-            head.style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
 
             if (directN === 38) {
                 //top veer off the right
@@ -72,12 +68,6 @@ const styleSnakeHead = (head, neck, direct, directN) => {
 
 const styleSnakeBody = (snake) => {
     for (let i = snake.length - 2; i >= 1; i--) {
-        if (convert(snake[i].style.top) == convert(snake[i - 1].style.top) && convert(snake[i].style.top) == convert(snake[i + 1].style.top)) {
-            // set shadow
-            snake[i].style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
-        } else {
-            snake[i].style.borderBottom = 'none';
-        }
     }
 }
 
@@ -87,16 +77,12 @@ const styleSnakeTail = (tail, beforetail) => {
         check = convert(tail.style.top) - convert(beforetail.style.top);
         if (check > 0) {
             tail.style.borderRadius = '0 0 1rem 1rem';
-            tail.style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
         } else {
             tail.style.borderRadius = '1rem 1rem 0 0';
-            tail.style.borderBottom = 'none';
         }
     } else if (check > 0) {
         tail.style.borderRadius = '0 1rem 1rem 0';
-        tail.style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
     } else {
         tail.style.borderRadius = '1rem 0 0 1rem';
-        tail.style.borderBottom = '0.4rem solid rgba(188, 196, 185, 0.3)';
     }
 }
