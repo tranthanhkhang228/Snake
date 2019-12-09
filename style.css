@@ -5,6 +5,9 @@
     font-size : 62.5%;
 }
 
+/**************************
+        game frame
+***************************/
 .game-frame {
     margin  : 10rem auto;
     border  : 0.2rem solid #058229;
@@ -22,7 +25,7 @@
     top             : 50%;
     left            : 50%;
     transform       : translate(-50%, -50%);
-    z-index: 0;
+    z-index         : 0;
 }
 
 .game-frame__pop-up {
@@ -48,27 +51,118 @@
     transform    : translate(-50%, -50%);
 }
 
+
+
+
+
+/**************************
+            snake
+***************************/
+
+/* body */
 .snake {
     position        : absolute;
     width           : 2rem;
     height          : 2rem;
     background-color: #1896de;
-    background-clip: padding-box;
-    /* transition   : all 0.5s; */
+    /* background-clip : padding-box; */
 }
 
+/* shadow for body */
 .shadow-bot {
     border-bottom: 0.4rem solid rgba(188, 196, 185, 0.3);
 }
 
+/* head */
+.head {
+    margin          : 30rem auto;
+    width           : 10rem;
+    height          : 10rem;
+    background-color: #1896de;
+    position        : relative;
+}
+
+/* nose */
+.head__nose {
+    width           : 100%;
+    height          : 80%;
+    background-color: #1896de;
+    position        : absolute;
+    top             : -40%;
+    border-radius   : 100% 100% 0 0;
+}
+
+.head__nose::before {
+    content         : "";
+    width           : 10%;
+    height          : 10%;
+    border-radius   : 50% 30% 50% 30%;
+    background-color: #1d4b96;
+    position        : absolute;
+    top             : 25%;
+    left            : 15%;
+}
+
+.head__nose::after {
+    content         : "";
+    width           : 10%;
+    height          : 10%;
+    border-radius   : 30% 50% 30% 50%;
+    background-color: #1d4b96;
+    position        : absolute;
+    top             : 25%;
+    left            : 70%;
+}
+
+/* eyes */
+.head__eyes {
+    width           : 40%;
+    height          : 40%;
+    background-color: white;
+    border          : 1rem solid #1896de;
+    border-radius   : 50%;
+    position        : absolute;
+    top             : 45%;
+
+}
+
+.-eye-1 {
+    left     : 0;
+    transform: translate(-40%, -50%);
+}
+
+.-eye-2 {
+    left     : 100%;
+    transform: translate(-60%, -50%);
+}
+
+
+/* iris */
+.head__iris {
+    width           : 60%;
+    height          : 60%;
+    background-color: #1d4b96;
+    border-radius   : 50%;
+    position        : absolute;
+    left            : 50%;
+    transform       : translateX(-50%);
+}
+
+
+
+
+
+/**************************
+            bait
+***************************/
 .bait {
-    z-index: 1;
+    z-index : 1;
     position: absolute;
 }
 
 .bait i {
-    font-size: 2.5rem;
-    color    : red;
+    font-size    : 2.5rem;
+    color        : red;
     /* box-shadow: 0.2rem 0.2rem 0.6rem 0.2rem; */
 }
 

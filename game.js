@@ -95,6 +95,7 @@ class Game {
     // assign a new coordinate to snake's head
     assignSnakeHead() {
         let newX, newY;
+        let oldDirect = this.directN;
         switch (this.direct) {
             case 'UP':
                 newY = convert(this.snake[0].style.top) - this.step;
@@ -119,7 +120,7 @@ class Game {
         }
 
         // add style for snake's head
-        styleSnakeHead(this.snake[0], this.snake[1], this.direct, this.directN);
+        styleSnakeHead(this.snake[0], this.snake[1], this.direct, oldDirect);
     }
 
     // Checking if snake ate a bait or not
