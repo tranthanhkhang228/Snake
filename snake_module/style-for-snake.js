@@ -3,10 +3,25 @@ import { convert } from '../util.js';
 export { styleSnakeHead, styleSnakeBody, styleSnakeTail };
 
 const styleSnakeHead = (head, neck, direct, directN) => {
+    const nose = Array.from(head.children)[0];
+    const eye1 = Array.from(head.children)[1];
+    const eye2 = Array.from(head.children)[2];
+    // const iris1 = Array.from(eye1.chilren)[0];
+    // const iris2 = Array.from(eye2.chilren)[0];
+
     switch (direct) {
         case 'UP':
-            // set style for snake's head
-            head.style.borderRadius = '1rem 1rem 0 0';
+            // set style for snake's nose
+            nose.classList.remove('head__nose--left', 'head__nose--right', '-left-right');
+            nose.classList.add('head__nose--top', '-top-bot');
+
+            // set style for snake's eyes
+            eye1.classList.remove('head__eyes--left', 'head__eyes--right', '-eye-1--left', '-eye-1--right');
+            eye1.classList.add('head__eyes--top', '-eye-1--top');
+            eye2.classList.remove('head__eyes--left', 'head__eyes--right', '-eye-2--left', '-eye-2--right');
+            eye2.classList.add('head__eyes--top', '-eye-2--top');
+
+            // head.style.borderRadius = '1rem 1rem 0 0';
 
             //set style for snake's neck when snake veer off
             if (directN === 39) {
@@ -22,7 +37,15 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             }
             break;
         case 'DOWN':
-            head.style.borderRadius = '0 0 1rem 1rem';
+            // set style for snake's nose
+            nose.classList.remove('head__nose--left', 'head__nose--right', '-left-right');
+            nose.classList.add('head__nose--bot', '-top-bot');
+
+            // set style for snake's eyes
+            eye1.classList.remove('head__eyes--left', 'head__eyes--right', '-eye-1--left', '-eye-1--right');
+            eye1.classList.add('head__eyes--bot', '-eye-1--bot');
+            eye2.classList.remove('head__eyes--left', 'head__eyes--right', '-eye-2--left', '-eye-2--right');
+            eye2.classList.add('head__eyes--bot', '-eye-2--bot');
 
             if (directN === 39) {
                 //right veer off the bottom
@@ -36,7 +59,16 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             }
             break;
         case 'LEFT':
-            head.style.borderRadius = '1rem 0 0 1rem';
+            // set style for snake's nose
+            nose.classList.remove('head__nose--top', 'head__nose--bot', '-top-bot');
+            nose.classList.add('head__nose--left', '-left-right');
+
+            // set style for snake's eyes
+            eye1.classList.remove('head__eyes--top', 'head__eyes--bot', '-eye-1--top', '-eye-1--bot');
+            eye1.classList.add('head__eyes--left', '-eye-1--left');
+            eye2.classList.remove('head__eyes--top', 'head__eyes--bot', '-eye-2--top', '-eye-2--bot');
+            eye2.classList.add('head__eyes--left', '-eye-2--left');
+
 
             if (directN === 38) {
                 //top veer off the left
@@ -50,7 +82,15 @@ const styleSnakeHead = (head, neck, direct, directN) => {
             }
             break;
         case 'RIGHT':
-            head.style.borderRadius = '0 1rem 1rem 0';
+            // set style for snake's nose
+            nose.classList.remove('head__nose--top', 'head__nose--bot', '-top-bot');
+            nose.classList.add('head__nose--right', '-left-right');
+
+            // set style for snake's eyes
+            eye1.classList.remove('head__eyes--top', 'head__eyes--bot', '-eye-1--top', '-eye-1--bot');
+            eye1.classList.add('head__eyes--right', '-eye-1--right');
+            eye2.classList.remove('head__eyes--top', 'head__eyes--bot', '-eye-2--top', '-eye-2--bot');
+            eye2.classList.add('head__eyes--right', '-eye-2--right');
 
             if (directN === 38) {
                 //top veer off the right

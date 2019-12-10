@@ -59,21 +59,16 @@
             snake
 ***************************/
 
-/* body */
+/*** body ***/
 .snake {
-    position        : absolute;
-    width           : 2rem;
-    height          : 2rem;
-    background-color: #1896de;
+    position           : absolute;
+    width              : 2rem;
+    height             : 2rem;
+    background-color   : #1896de;
     /* background-clip : padding-box; */
 }
 
-/* shadow for body */
-.shadow-bot {
-    border-bottom: 0.4rem solid rgba(188, 196, 185, 0.3);
-}
-
-/* head */
+/*** head ***/
 .head {
     margin          : 30rem auto;
     width           : 10rem;
@@ -82,70 +77,216 @@
     position        : relative;
 }
 
-/* nose */
+/*** nose ***/
 .head__nose {
-    width           : 100%;
-    height          : 80%;
     background-color: #1896de;
     position        : absolute;
-    top             : -40%;
-    border-radius   : 100% 100% 0 0;
 }
 
+/* nose's direct */
+.-top-bot {
+    width : 100%;
+    height: 80%;
+}
+
+.-left-right {
+    width : 80%;
+    height: 100%;
+}
+
+.head__nose--top {
+    top          : -40%;
+    border-radius: 100% 100% 0 0;
+}
+
+.head__nose--bot {
+    bottom       : -40%;
+    border-radius: 0 0 100% 100%;
+}
+
+.head__nose--left {
+    left         : -40%;
+    border-radius: 100% 0 0 100%;
+}
+
+.head__nose--right {
+    right        : -40%;
+    border-radius: 0 100% 100% 0;
+}
+
+/*** nostril ***/
 .head__nose::before {
     content         : "";
     width           : 10%;
     height          : 10%;
-    border-radius   : 50% 30% 50% 30%;
     background-color: #1d4b96;
     position        : absolute;
-    top             : 25%;
-    left            : 15%;
 }
 
 .head__nose::after {
     content         : "";
     width           : 10%;
     height          : 10%;
-    border-radius   : 30% 50% 30% 50%;
     background-color: #1d4b96;
     position        : absolute;
-    top             : 25%;
-    left            : 70%;
 }
 
-/* eyes */
+/* nostril top */
+.head__nose--top::before {
+    border-radius: 50% 30% 50% 30%;
+    top          : 25%;
+    left         : 15%;
+}
+
+.head__nose--top::after {
+    border-radius: 30% 50% 30% 50%;
+    top          : 25%;
+    left         : 75%;
+}
+
+/* nostril bottom */
+.head__nose--bot::before {
+    border-radius: 30% 50% 30% 50%;
+    bottom       : 25%;
+    left         : 15%;
+}
+
+.head__nose--bot::after {
+    border-radius: 50% 30% 50% 30%;
+    bottom       : 25%;
+    left         : 75%;
+}
+
+/* nostril left */
+.head__nose--left::before {
+    border-radius: 50% 30% 50% 30%;
+    top          : 15%;
+    left         : 25%;
+}
+
+.head__nose--left::after {
+    border-radius: 30% 50% 30% 50%;
+    top          : 75%;
+    left         : 25%;
+}
+
+/* nostril right */
+.head__nose--right::before {
+    border-radius: 30% 50% 30% 50%;
+    top          : 15%;
+    right        : 25%;
+}
+
+.head__nose--right::after {
+    border-radius: 50% 30% 50% 30%;
+    top          : 75%;
+    right        : 25%;
+}
+
+/*** eyes ***/
 .head__eyes {
     width           : 40%;
     height          : 40%;
     background-color: white;
-    border          : 1rem solid #1896de;
+    border          : 0.2rem solid #1896de;
     border-radius   : 50%;
     position        : absolute;
-    top             : 45%;
-
 }
 
-.-eye-1 {
+/* eye direct */
+
+/* top */
+.head__eyes--top {
+    top: 45%;
+}
+
+.-eye-1--top {
     left     : 0;
     transform: translate(-40%, -50%);
 }
 
-.-eye-2 {
+.-eye-2--top {
     left     : 100%;
     transform: translate(-60%, -50%);
 }
 
+/* bot */
+.head__eyes--bot {
+    bottom: 45%;
+}
 
-/* iris */
+.-eye-1--bot {
+    left     : 0;
+    transform: translate(-40%, 50%);
+}
+
+.-eye-2--bot {
+    left     : 100%;
+    transform: translate(-60%, 50%);
+}
+
+.head__eyes--left {
+    left: 45%;
+}
+
+.-eye-1--left {
+    top: 0;
+    transform: translate(-50%, -40%);
+}
+
+.-eye-2--left {
+    top: 100%;
+    transform: translate(-50%, -60%);
+}
+
+/* right */
+.head__eyes--right {
+    right: 45%;
+}
+
+.-eye-1--right {
+    top: 0;
+    transform: translate(50%, -40%);
+}
+
+.-eye-2--right {
+    top: 100%;
+    transform: translate(50%, -60%);
+}
+
+
+/*** iris ***/
 .head__iris {
     width           : 60%;
     height          : 60%;
     background-color: #1d4b96;
     border-radius   : 50%;
     position        : absolute;
-    left            : 50%;
-    transform       : translateX(-50%);
+
+}
+
+.head__iris--top {
+    top      : 0;
+    left     : 50%;
+    transform: translateX(-50%);
+}
+
+.head__iris--bot {
+    bottom   : 0;
+    left     : 50%;
+    transform: translateX(-50%);
+}
+
+.head__iris--left {
+    left        : 0;
+    top         : 50%;
+    transform: translateY(-50%);
+}
+
+.head__iris--right {
+    right    : 0;
+    top      : 50%;
+    transform: translateY(-50%);
 }
 
 
