@@ -5,6 +5,8 @@
     font-size : 62.5%;
 }
 
+/* 4573e8 */
+
 /**************************
         game frame
 ***************************/
@@ -16,11 +18,9 @@
     position: relative;
 }
 
-.game-frame__wall {
-    background-color: #aeed42;
+#game-frame__court {
+    background-color: #aad751;
     box-shadow      : 0 0 0 2rem rgba(79, 168, 47, 0.8);
-    width           : 50rem;
-    height          : 50rem;
     position        : absolute;
     top             : 50%;
     left            : 50%;
@@ -60,22 +60,15 @@
 ***************************/
 
 /*** body ***/
-.snake {
+.body {
     position           : absolute;
     width              : 2rem;
     height             : 2rem;
     background-color   : #1896de;
-    /* background-clip : padding-box; */
+    z-index: 1;
 }
 
 /*** head ***/
-.head {
-    margin          : 30rem auto;
-    width           : 10rem;
-    height          : 10rem;
-    background-color: #1896de;
-    position        : relative;
-}
 
 /*** nose ***/
 .head__nose {
@@ -297,14 +290,13 @@
             bait
 ***************************/
 .bait {
-    z-index : 1;
+    z-index : 2;
     position: absolute;
 }
 
 .bait i {
     font-size    : 2.5rem;
     color        : red;
-    /* box-shadow: 0.2rem 0.2rem 0.6rem 0.2rem; */
 }
 
 .-display-none {

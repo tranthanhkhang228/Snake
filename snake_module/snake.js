@@ -39,6 +39,7 @@ class Snake {
         eye1.append(iris1);
         eye2.append(iris2);
 
+        this.nodes[0].style.zIndex = '2';
         this.nodes[0].append(nose, eye1, eye2);
     }
 
@@ -51,7 +52,7 @@ class Snake {
     createNode(x, y) {
         const node = document.createElement('div');
         this.gameFrame.append(node);
-        node.setAttribute('class', 'snake');
+        node.setAttribute('class', 'body');
 
         node.style.left = `${x}rem`;
         node.style.top = `${y}rem`;

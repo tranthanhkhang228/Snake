@@ -57,6 +57,29 @@ const setDirect = (e) => {
     game.start();
 };
 
+/* create game's court */
+const createCourt = () => {
+    let canvas = document.getElementById('game-frame__court'); // game frame wall and court
+    let context = canvas.getContext('2d');
+    let j = 0, k = 0;
+    for (let i = 0; i <= 480; i += 20) {
+        if (i % 40 == 0) {
+            j = 0;
+            k = 480;
+        } else {
+            j = 20;
+            k = 460;
+        }
+
+        for (j; j <= k; j += 40) {
+            context.beginPath();
+            context.rect(j, i, 20, 20);
+            context.fillStyle = '#a2d149';
+            context.fill();
+        }
+    }
+}
+
 /* 
     Starting game
     Click the start button to start game
@@ -64,6 +87,9 @@ const setDirect = (e) => {
 btnStart.addEventListener('click', e => {
     // hide popup
     popup.setAttribute('class', '-display-none');
+
+    // create court
+    createCourt();
 
     // create snake
     snake = new Snake(gameFrame, [{ x: 20, y: 20 }, { x: 22, y: 20 }, { x: 24, y: 20 }]);
