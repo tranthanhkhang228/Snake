@@ -1,5 +1,5 @@
 import { convert } from './util.js';
-import { styleSnakeHead, styleSnakeBody, styleSnakeTail } from './snake_module/style-for-snake.js';
+import { styleSnakeHead, styleSnakeTail } from './snake_module/style-for-snake.js';
 
 export { Game };
 
@@ -76,9 +76,6 @@ class Game {
             this.assignNodeAToNodeB(this.snake[i - 1], this.snake[i]);
         }
 
-        // shadow for snake's body
-        // styleSnakeBody(this.snake);
-
         // add style for snake's tail
         styleSnakeTail(this.snake[this.snake.length - 1], this.snake[this.snake.length - 2]);
 
@@ -142,6 +139,15 @@ class Game {
         if (x < 2 | x > 50 | y < 2 | y > 50) {
             this.body.removeEventListener('keyup', this.navigateSnake);
             clearInterval(this.play);
+        }
+
+        for (let i = 1; i < this.snake.length; i++) {
+            let nodeX = convert(this.snake[i].style.left);
+            let nodeY = convert(this.snake[i].style.top);
+            if (nodeX === x && nodeY === y) {
+                this.body.removeEventListener('keyup', this.navigateSnake);
+                clearInterval(this.play);
+            }
         }
     }
 }

@@ -11,16 +11,29 @@
 </head>
 
 <body>
-    <div class="game-frame">
+    <div class="game-begin">
+        <div class="game__title">
+            Hungry Snake
+        </div>
+        <div class="game__logo">
+            <img src="../image/bg.png" alt="">
+        </div>
+        <div class="game__menu">
+            <div>
+                <button class="game__start game__option">Start</button>
+            </div>
+            <div>
+                <button class="game__mode game__option">Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-frame -display-none">
         <div class="bait">
             <i class="fas fa-apple-alt"></i>
         </div>
 
         <canvas id="game-frame__court" width="500" height="500"></canvas>
-
-        <div class="game-frame__pop-up">
-            <Button class="game-frame__start">Start!</Button>
-        </div>
     </div>
     <script src="begin.js" type="module"></script>
 </body>

@@ -6,12 +6,13 @@ import { Game } from './game.js';
     Getting game's element: body tag, popup to start game, gameframe, bait
 */
 const body = document.querySelector('body'); // body element
+
 const gameFrame = document.querySelector('.game-frame'); // game frame
 
-const popup = document.querySelector('.game-frame__pop-up'); // a popup includes a start button
-const btnStart = document.querySelector('.game-frame__start'); // a element button uses to start game
-
 const baitElement = document.querySelector('.bait'); // bait element
+
+const gameBegin = document.querySelector('.game-begin');
+const gameStart = document.querySelector('.game__start');
 
 /*
     Creating game's objects and parameters: snake, bait, snake's step, snake's direct
@@ -28,33 +29,39 @@ let game; // the game controller
     set default value for snake's direct
 */
 const setDirect = (e) => {
+    let check = false;
+
     switch (e.keyCode) {
         case 37:
             direct = 'LEFT';
             directN = 37;
+
+            check = true;
             break;
         case 38:
             direct = 'UP';
             directN = 38;
-            break;
-        case 39:
-            direct = 'RIGHT';
-            directN = 39;
+
+            check = true;
             break;
         case 40:
             direct = 'DOWN';
             directN = 40;
+
+            check = true;
             break;
     };
 
-    // remove setDirect
-    body.removeEventListener('keyup', setDirect);
+    if (check) {
+        // remove setDirect
+        body.removeEventListener('keyup', setDirect);
 
-    // create game
-    game = new Game(body, snake, bait, step, direct, directN);
+        // create game
+        game = new Game(body, snake, bait, step, direct, directN);
 
-    //run game
-    game.start();
+        //run game
+        game.start();
+    }
 };
 
 /* create game's court */
@@ -84,9 +91,11 @@ const createCourt = () => {
     Starting game
     Click the start button to start game
 */
-btnStart.addEventListener('click', e => {
+gameStart.addEventListener('click', e => {
     // hide popup
-    popup.setAttribute('class', '-display-none');
+    // popup.setAttribute('class', '-display-none');
+    gameBegin.setAttribute('class', '-display-none');
+    gameFrame.classList.remove('-display-none');
 
     // create court
     createCourt();

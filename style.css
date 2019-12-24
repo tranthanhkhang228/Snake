@@ -6,6 +6,64 @@
 }
 
 /* 4573e8 */
+/**************************
+           game
+***************************/
+.game-begin {
+    display       : flex;
+    margin        : 0 auto;
+    width         : 110rem;
+    height        : 60rem;
+    flex-direction: column;
+    box-shadow    : 0 0 1rem 0 black;
+    border-radius : 20px;
+}
+
+.game__title {
+    width    : 100%;
+    height   : 15%;
+    font-size: 7rem;
+}
+
+.game__logo {
+    width   : 100%;
+    height  : 65%;
+    position: relative;
+}
+
+.game__logo>img {
+    position  : absolute;
+    display   : inline-block;
+    width     : 100%;
+    height    : 100%;
+    object-fit: cover;
+}
+
+.game__menu {
+    display        : flex;
+    width          : 100%;
+    height         : 20%;
+    flex-direction : row;
+    justify-content: space-around;
+}
+
+.game__option {
+    width           : 15rem;
+    height          : 4rem;
+    font-size       : 3rem;
+    background-color: #0abf16;
+    color           : #edf5ee;
+    border          : none;
+    border-radius   : 10px;
+    position        : relative;
+    top             : 50%;
+    transform       : translateY(-50%);
+    cursor          : pointer;
+}
+
+
+
+
 
 /**************************
         game frame
@@ -28,29 +86,6 @@
     z-index         : 0;
 }
 
-.game-frame__pop-up {
-    position        : absolute;
-    width           : 100%;
-    height          : 100%;
-    background-color: rgba(222, 209, 193, 0.9);
-    display         : block;
-}
-
-.game-frame__start {
-    position     : absolute;
-    width        : 12rem;
-    height       : 5rem;
-    text-align   : center;
-    color        : #09db44;
-    font-size    : 2.5rem;
-    font-weight  : bold;
-    border       : 2px solid #07db42;
-    border-radius: 2rem;
-    top          : 50%;
-    left         : 50%;
-    transform    : translate(-50%, -50%);
-}
-
 
 
 
@@ -61,11 +96,11 @@
 
 /*** body ***/
 .body {
-    position           : absolute;
-    width              : 2rem;
-    height             : 2rem;
-    background-color   : #1896de;
-    z-index: 1;
+    position        : absolute;
+    width           : 2rem;
+    height          : 2rem;
+    background-color: #1896de;
+    z-index         : 1;
 }
 
 /*** head ***/
@@ -223,12 +258,12 @@
 }
 
 .-eye-1--left {
-    top: 0;
+    top      : 0;
     transform: translate(-50%, -40%);
 }
 
 .-eye-2--left {
-    top: 100%;
+    top      : 100%;
     transform: translate(-50%, -60%);
 }
 
@@ -238,12 +273,12 @@
 }
 
 .-eye-1--right {
-    top: 0;
+    top      : 0;
     transform: translate(50%, -40%);
 }
 
 .-eye-2--right {
-    top: 100%;
+    top      : 100%;
     transform: translate(50%, -60%);
 }
 
@@ -271,8 +306,8 @@
 }
 
 .head__iris--left {
-    left        : 0;
-    top         : 50%;
+    left     : 0;
+    top      : 50%;
     transform: translateY(-50%);
 }
 
@@ -295,8 +330,8 @@
 }
 
 .bait i {
-    font-size    : 2.5rem;
-    color        : red;
+    font-size: 2.5rem;
+    color    : red;
 }
 
 .-display-none {
