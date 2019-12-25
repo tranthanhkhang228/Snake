@@ -25,13 +25,22 @@
     font-size: 7rem;
 }
 
-.game__logo {
-    width   : 100%;
-    height  : 65%;
-    position: relative;
+/*** slider ***/
+.slider {
+    display       : flex;
+    flex-direction: row;
+    width         : 100%;
+    height        : 65%;
+    position      : relative;
 }
 
-.game__logo>img {
+.slide {
+    height  : 100%;
+    width   : 100%;
+    position: absolute;
+}
+
+.slide>img {
     position  : absolute;
     display   : inline-block;
     width     : 100%;
@@ -47,7 +56,7 @@
     justify-content: space-around;
 }
 
-.game__option {
+.game__start {
     width           : 15rem;
     height          : 4rem;
     font-size       : 3rem;
@@ -61,7 +70,54 @@
     cursor          : pointer;
 }
 
+.game__mode {
+    display         : flex;
+    flex-direction  : row;
+    width           : 15rem;
+    height          : 4rem;
+    font-size       : 3rem;
+    position        : relative;
+    top             : 50%;
+    transform       : translateY(-50%);
+    cursor          : pointer;
+}
 
+.game__mode-content {
+    color: #0abf16;
+    position : absolute;
+    top      : 50%;
+    left     : 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pre {
+    width: 20%;
+    height: 100%;
+    left     : 0;
+}
+
+.next {
+    width: 20%;
+    height: 100%;
+    right    : 0;
+}
+
+.pre-next {
+    width: 100%;
+    height: 100%;
+    background-color: #0abf16;
+    border: none;
+    color: #edf5ee;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+}
+
+.centerY {
+    position : absolute;
+    top      : 50%;
+    transform: translateY(-50%);
+}
 
 
 
@@ -102,8 +158,6 @@
     background-color: #1896de;
     z-index         : 1;
 }
-
-/*** head ***/
 
 /*** nose ***/
 .head__nose {

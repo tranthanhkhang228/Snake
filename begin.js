@@ -2,6 +2,8 @@ import { Snake } from './snake_module/snake.js';
 import { Bait } from './bait.js';
 import { Game } from './game.js';
 
+
+
 /* 
     Getting game's element: body tag, popup to start game, gameframe, bait
 */
@@ -14,8 +16,15 @@ const baitElement = document.querySelector('.bait'); // bait element
 const gameBegin = document.querySelector('.game-begin');
 const gameStart = document.querySelector('.game__start');
 
+const listImg = document.querySelectorAll('.slide'); // list of images of game's modes
+
+const preBtn = document.querySelector('.pre'); // button changing mode
+const nextBtn = document.querySelector('.next'); // button changing mode
+
+
+
 /*
-    Creating game's objects and parameters: snake, bait, snake's step, snake's direct
+    Creating game's objects and parameters: snake, bait, snake's step, snake's direct, game's mode
 */
 let snake;
 let bait = new Bait(0, 0, baitElement);
@@ -24,6 +33,40 @@ let step = 2; // step of each move, snake's step: 2 rem is one step in the scree
 let direct; //
 let directN; // the currently direct of a snake
 let game; // the game controller
+
+// game's modes
+let currentMode = 1;
+let totalModes = 3;
+
+
+
+/*
+    set mode for game
+*/
+preBtn.addEventListener('click', e => {
+    currentMode = currentMode - 1 <= 0 ? totalModes : currentMode - 1;
+    displayImg();
+});
+
+nextBtn.addEventListener('click', e => {
+    currentMode = currentMode + 1 > totalModes ? 1 : currentMode + 1;
+    displayImg();
+});
+
+const displayImg = () => {
+    listImg.forEach((img, index) => {
+        if (index + 1 === currentMode) {
+            img.classList.remove('-display-none');
+            img.classList.add('-display-block');
+        }
+        else {
+            img.classList.remove('-display-block');
+            img.classList.add('-display-none');
+        }
+    })
+}
+
+
 
 /*
     set default value for snake's direct
@@ -64,6 +107,8 @@ const setDirect = (e) => {
     }
 };
 
+
+
 /* create game's court */
 const createCourt = () => {
     let canvas = document.getElementById('game-frame__court'); // game frame wall and court
@@ -87,6 +132,8 @@ const createCourt = () => {
     }
 }
 
+
+
 /* 
     Starting game
     Click the start button to start game
@@ -106,6 +153,13 @@ gameStart.addEventListener('click', e => {
     // observing a keyup event to set default value for snake's direct
     body.addEventListener('keyup', setDirect);
 });
+
+
+
+
+
+
+
 
 
 
