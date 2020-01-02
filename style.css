@@ -129,7 +129,7 @@
     width: 100%;
 }
 
-.game-play__btn {
+.game-play__restart {
     margin: 0 1rem 0 0;
     cursor: pointer;
     width           : 15rem;
