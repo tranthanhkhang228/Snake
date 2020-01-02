@@ -84,6 +84,7 @@ class Game {
 
         // reset game's point
         this.point = 0;
+        this.gamePoint.textContent = this.point;
 
         // set the new direct to start game again
         let _game = this;
