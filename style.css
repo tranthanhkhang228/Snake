@@ -5,6 +5,12 @@
     font-size : 62.5%;
 }
 
+.hungry-snake {
+    margin: 0 auto;
+    height: 78rem;
+    width : 110rem;
+}
+
 /* 4573e8 */
 /**************************
            game
@@ -12,17 +18,21 @@
 .game-begin {
     display       : flex;
     margin        : 0 auto;
-    width         : 110rem;
-    height        : 60rem;
+    width         : 60%;
+    height        : 35rem;
     flex-direction: column;
     box-shadow    : 0 0 1rem 0 black;
     border-radius : 20px;
+    position      : relative;
+    top           : 50%;
+    transform     : translateY(-50%);
 }
 
 .game__title {
+    padding: 0 0 0 1rem;
     width    : 100%;
     height   : 15%;
-    font-size: 7rem;
+    font-size: 4rem;
 }
 
 /*** slider ***/
@@ -70,66 +80,82 @@
     cursor          : pointer;
 }
 
-.game__mode {
-    display         : flex;
-    flex-direction  : row;
-    width           : 15rem;
-    height          : 4rem;
-    font-size       : 3rem;
-    position        : relative;
-    top             : 50%;
-    transform       : translateY(-50%);
-    cursor          : pointer;
-}
 
-.game__mode-content {
-    color: #0abf16;
-    position : absolute;
-    top      : 50%;
-    left     : 50%;
-    transform: translate(-50%, -50%);
-}
-
-.pre {
-    width: 20%;
-    height: 100%;
-    left     : 0;
-}
-
-.next {
-    width: 20%;
-    height: 100%;
-    right    : 0;
-}
-
-.pre-next {
-    width: 100%;
-    height: 100%;
-    background-color: #0abf16;
-    border: none;
-    color: #edf5ee;
-    cursor: pointer;
-    user-select: none;
-    text-align: center;
-}
-
-.centerY {
-    position : absolute;
-    top      : 50%;
-    transform: translateY(-50%);
-}
 
 
 
 /**************************
-        game frame
+        game play
 ***************************/
-.game-frame {
-    margin  : 10rem auto;
-    border  : 0.2rem solid #058229;
-    width   : 54rem;
-    height  : 54rem;
+.game-play {
+    margin          : 0 auto;
+    height          : 78rem;
+    width           : 60rem;
+    display         : flex;
+    flex-direction  : column;
+}
+
+/*** game's point ***/
+.game-play__point {
+    height: 9rem;
+    width: 100%;
     position: relative;
+}
+
+.game-play__point i {
+    font-size: 3rem;
+    color: red;
+    position: absolute;
+    left: 3rem;
+    bottom: 0;
+}
+
+.point {
+    margin: 0;
+    height: 3rem;
+    width: 80%;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #1896de;
+    position: absolute;
+    left: 6rem;
+    bottom: 0;
+}
+
+/*** game's menu ***/
+.game-play__menu {
+    padding: 0 0 0 3rem;
+    height: 13rem;
+    width: 100%;
+}
+
+.game-play__btn {
+    margin: 0 1rem 0 0;
+    cursor: pointer;
+    width           : 15rem;
+    height          : 4rem;
+    font-size       : 3rem;
+    background-color: rgba(30, 74, 232, 0.7);
+    color           : #edf5ee;
+    border          : none;
+    border-radius   : 10px;
+}
+
+/*** game's container ***/
+.game-container {
+    height  : 56rem;
+    width   : 100%;
+    position: relative;
+}
+
+.game-frame {
+    height  : 54rem;    
+    width   : 54rem;
+    border  : 0.2rem solid #058229;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
 }
 
 #game-frame__court {

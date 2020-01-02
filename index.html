@@ -11,47 +11,51 @@
 </head>
 
 <body>
-    <div class="game-begin">
-        <div class="game__title">
-            Hungry Snake
-        </div>
-        <div class="slider">
-            <div class="slide -display-block">
-                <img src="../image/bg.png" alt="">
+    <div class="hungry-snake">
+        <div class="game-begin">
+            <div class="game__title">
+                Hungry Snake
             </div>
-            <div class="slide -display-none">
-                <img src="./test/61uhuojj0eL._SX425_.jpg" alt="">
-            </div>
-            <div class="slide -display-none">
-                <img src="./test/download.jpg" alt="">
-            </div>
-        </div>
-
-        <div class="game__menu">
-            <div>
-                <button class="game__start game__option">Start</button>
-            </div>
-            <div class="game__mode game__option">
-                <div class="pre centerY">
-                    <button class="pre-next"><</button> 
+            <div class="slider">
+                <div class="slide -display-block">
+                    <img src="../image/bg.png" alt="">
                 </div>
-
-                <div class="game__mode-content">Mode</div>
-                
-                <div class="next centerY">
-                    <button class="pre-next">></button>
+                <div class="slide -display-none">
+                    <img src="./test/61uhuojj0eL._SX425_.jpg" alt="">
                 </div>
+                <div class="slide -display-none">
+                    <img src="./test/download.jpg" alt="">
+                </div>
+            </div>
 
+            <div class="game__menu">
+                <div>
+                    <button class="game__start">Start</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="game-frame -display-none">
-        <div class="bait">
-            <i class="fas fa-apple-alt"></i>
+        <div class="game-play -display-none">
+            <div class="game-play__point">
+                <i class="fas fa-apple-alt"></i>
+                <p class="point">0</p>
+            </div>
+
+            <div class="game-container">
+                <div class="game-frame">
+                    <div class="bait">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+
+                    <canvas id="game-frame__court" width="500" height="500"></canvas>
+                </div>
+            </div>
+
+            <div class="game-play__menu">
+                <button class="game-play__restart game-play__btn">Restart</button>
+                <button class="game-play__pause game-play__btn">Pause</button>
+            </div>
         </div>
-
-        <canvas id="game-frame__court" width="500" height="500"></canvas>
     </div>
     <script src="begin.js" type="module"></script>
 </body>

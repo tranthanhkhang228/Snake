@@ -1,6 +1,6 @@
 import { Snake } from './snake_module/snake.js';
-import { Bait } from './bait.js';
-import { Game } from './game.js';
+import { Bait } from './modules/bait.js';
+import { Game } from './modules/game.js';
 
 
 
@@ -9,22 +9,18 @@ import { Game } from './game.js';
 */
 const body = document.querySelector('body'); // body element
 
+const gameBegin = document.querySelector('.game-begin');
+const gameStart = document.querySelector('.game__start');
+
+const gamePlay = document.querySelector('.game-play');
 const gameFrame = document.querySelector('.game-frame'); // game frame
 
 const baitElement = document.querySelector('.bait'); // bait element
 
-const gameBegin = document.querySelector('.game-begin');
-const gameStart = document.querySelector('.game__start');
-
-const listImg = document.querySelectorAll('.slide'); // list of images of game's modes
-
-const preBtn = document.querySelector('.pre'); // button changing mode
-const nextBtn = document.querySelector('.next'); // button changing mode
-
 
 
 /*
-    Creating game's objects and parameters: snake, bait, snake's step, snake's direct, game's mode
+    Creating game's objects and parameters: snake, bait, snake's step, snake's direct
 */
 let snake;
 let bait = new Bait(0, 0, baitElement);
@@ -34,44 +30,12 @@ let direct; //
 let directN; // the currently direct of a snake
 let game; // the game controller
 
-// game's modes
-let currentMode = 1;
-let totalModes = 3;
-
-
-
-/*
-    set mode for game
-*/
-preBtn.addEventListener('click', e => {
-    currentMode = currentMode - 1 <= 0 ? totalModes : currentMode - 1;
-    displayImg();
-});
-
-nextBtn.addEventListener('click', e => {
-    currentMode = currentMode + 1 > totalModes ? 1 : currentMode + 1;
-    displayImg();
-});
-
-const displayImg = () => {
-    listImg.forEach((img, index) => {
-        if (index + 1 === currentMode) {
-            img.classList.remove('-display-none');
-            img.classList.add('-display-block');
-        }
-        else {
-            img.classList.remove('-display-block');
-            img.classList.add('-display-none');
-        }
-    })
-}
-
 
 
 /*
     set default value for snake's direct
 */
-const setDirect = (e) => {
+const setFirstDirect = (e) => {
     let check = false;
 
     switch (e.keyCode) {
@@ -97,10 +61,10 @@ const setDirect = (e) => {
 
     if (check) {
         // remove setDirect
-        body.removeEventListener('keyup', setDirect);
+        body.removeEventListener('keyup', setFirstDirect);
 
         // create game
-        game = new Game(body, snake, bait, step, direct, directN);
+        game = new Game(body, gameFrame, snake, bait, step, direct, directN);
 
         //run game
         game.start();
@@ -142,7 +106,7 @@ gameStart.addEventListener('click', e => {
     // hide popup
     // popup.setAttribute('class', '-display-none');
     gameBegin.setAttribute('class', '-display-none');
-    gameFrame.classList.remove('-display-none');
+    gamePlay.classList.remove('-display-none');
 
     // create court
     createCourt();
@@ -151,7 +115,7 @@ gameStart.addEventListener('click', e => {
     snake = new Snake(gameFrame, [{ x: 20, y: 20 }, { x: 22, y: 20 }, { x: 24, y: 20 }]);
 
     // observing a keyup event to set default value for snake's direct
-    body.addEventListener('keyup', setDirect);
+    body.addEventListener('keyup', setFirstDirect);
 });
 
 

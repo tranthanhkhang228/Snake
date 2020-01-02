@@ -1,4 +1,4 @@
-import { convert } from '../util.js';
+import { convert } from '../modules/util.js';
 
 export { Snake };
 
