@@ -1,5 +1,6 @@
-import { convert } from './util.js';
+import { convert, createCourt } from './util.js';
 import { Snake } from '../snake_module/snake.js';
+import { Bait } from './bait.js';
 import { styleSnakeHead, styleSnakeTail } from '../snake_module/style-for-snake.js';
 
 export { Game };
@@ -15,7 +16,6 @@ class Game {
     constructor(body, gameFrame, snakeO, bait, step, direct, directN) {
         this.gamePoint = document.querySelector('.point'); // paragraph use for displaying game's point
         this.gameRestart = document.querySelector('.game-play__restart'); // button restart game
-        this.gamePause = document.querySelector('.game-play__pause'); // button pause game
 
         this.body = body; // body HTML element
         this.gameFrame = gameFrame;
@@ -36,39 +36,43 @@ class Game {
         this.bait.createBait();
 
         let _game = this;
+
         // observe keyboard click to change snake's direct
         this.body.addEventListener('keyup', function _setDirect(e) {
-            _game.navigateSnake(e, _game);
             _game._setDirect = _setDirect;
+            if (e.keyCode === 32) {
+                _game.pause();
+                this.removeEventListener('keyup', _setDirect);
+            } else {
+                _game.navigateSnake(e, _game);
+            }
         });
 
         // observe to restart game
         this.gameRestart.addEventListener('click', function _restart(e) {
+            e.target.blur();
+
             _game.restart();
             this.removeEventListener('click', _restart); // remove to save memory and avoid save redundant event too much time
         });
 
-        // observe to pause game
-        this.gamePause.addEventListener('click', function _pause(e) {
-            _game.pause();
-            this.removeEventListener('click', _pause); // remove to save memory and avoid save redundant event too much time
-        });
-
         // run game
         this.play = setInterval(() => {
+            // console.log(this.snake[0]);
             this.moveSnake();
             this.checkLose();
             if (this.checkEat()) {
                 this.snakeO.pushNode();
-                this.snake = this.snakeO.nodes;
+                // this.snake = this.snakeO.nodes; //need to fix
                 this.bait.createBait();
-
                 this.addPoint();
             }
         }, 140);
     }
 
     restart() {
+        console.log('restart');
+
         clearInterval(this.play); // stop current game
         this.body.removeEventListener('keyup', this._setDirect); // remove observable of changing snake's direct to avoid set redundant direct
 
@@ -127,7 +131,39 @@ class Game {
     }
 
     pause() {
+        let _game = this;
 
+        clearInterval(_game.play);
+
+        _game.removeAllEventListener();
+
+        _game.body.addEventListener('keyup', function _run(e) {
+            console.log('run');
+            if (e.keyCode === 32) {
+                this.removeEventListener('keyup', _run);
+                _game.start();
+            }
+        });
+    }
+
+    removeAllEventListener() {
+        let newBody = this.body.cloneNode(true);
+        this.body.parentNode.replaceChild(newBody, this.body);
+        let snakeO = this.snakeO;
+
+        this.snake.length = 0;
+
+        createCourt();
+
+        this.body = newBody;
+
+        let snake = document.querySelectorAll('.body');
+        let baitElement = document.querySelector('.bait');
+        let bait = new Bait(this.bait.x, this.bait.y, baitElement);
+
+        this.snakeO = snakeO;
+        snake.forEach(node => this.snake.push(node));
+        this.bait = bait;
     }
 
     navigateSnake(e, game) {
@@ -229,11 +265,13 @@ class Game {
 
     // check if snake's head touches the wall
     checkLose() {
+        let _game = this;
+
         let x = convert(this.snake[0].style.left);
         let y = convert(this.snake[0].style.top);
 
         if (x < 2 | x > 50 | y < 2 | y > 50) {
-            this.body.removeEventListener('keyup', this.navigateSnake);
+            this.body.removeEventListener('keyup', _game._setDirect);
             clearInterval(this.play);
         }
 
@@ -241,7 +279,7 @@ class Game {
             let nodeX = convert(this.snake[i].style.left);
             let nodeY = convert(this.snake[i].style.top);
             if (nodeX === x && nodeY === y) {
-                this.body.removeEventListener('keyup', this.navigateSnake);
+                this.body.removeEventListener('keyup', _game._setDirect);
                 clearInterval(this.play);
             }
         }
