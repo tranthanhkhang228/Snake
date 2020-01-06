@@ -14,6 +14,7 @@ class Game {
     _setFirstDirect;
     _setDirect;
     _restart;
+    _rerun;
 
     constructor(body, gameFrame, snakeO, bait, step, direct, directN) {
         this.gamePoint = document.querySelector('.point'); // paragraph use for displaying game's point
@@ -70,14 +71,34 @@ class Game {
 
         // observe to start game again
         this.body.addEventListener('keyup', function _setFirstDirect(e) {
-            console.log('setFirst');
-
             _game._setFirstDirect = _setFirstDirect;
             _game.checkToRunGameAgain(e);
         })
     }
 
     pause() {
+        let _game = this;
+
+        clearInterval(this.play);
+
+        this.isPause = true;
+
+        function _rerun(e) {
+            let check = _game.navigateSnake(e, 'rerun');
+
+            if (check) {
+                _game.body.removeEventListener('keyup', _game._rerun);
+
+                // run game again
+                _game.removeListener();
+                _game.addListener();
+                _game.runGame();
+            }
+        };
+
+        this.body.addEventListener('keyup', _rerun);
+
+        this._rerun = _rerun;
     }
 
     runGame() {
@@ -100,27 +121,34 @@ class Game {
 
         // observe keyboard click to change snake's direct
         this.body.addEventListener('keyup', function _setDirect(e) {
-            console.log('direct');
-            _game._setDirect = _setDirect;
+            if (e.keyCode === 32) {
+                _game.pause();
+                this.removeEventListener('keyup', _setDirect);
+            } else {
+                _game._setDirect = _setDirect;
 
-            _game.navigateSnake(e);
+                _game.navigateSnake(e, 'setDirect');
+            }
         });
 
-        // observe to restart game
-        this.gameRestart.addEventListener('click', function _restart(e) {
-            console.log('restart');
-            _game._restart = _restart;
-
+        function _restart(e) {
             e.target.blur();
 
             _game.restart();
-        });
+        };
+
+        // observe to restart game
+        this.gameRestart.addEventListener('click', _restart);
+
+        this._restart = _restart;
     }
 
     // remove all event listeners to avoid stacking up events
     removeListener() {
         this.body.removeEventListener('keyup', this._setDirect);
         this.gameRestart.removeEventListener('click', this._restart);
+
+        this.body.removeEventListener('keyup', this._rerun);
     }
 
     checkToRunGameAgain(e) {
@@ -157,10 +185,10 @@ class Game {
         }
     };
 
-    navigateSnake(e) {
-        if (((e.keyCode === 37 && this.directN !== 39) | (e.keyCode === 39 && this.directN !== 37) |
-            (e.keyCode === 38 && this.directN !== 40) | (e.keyCode === 40 && this.directN !== 38)) &&
-            e.keyCode !== this.directN) {
+    navigateSnake(e, option) {
+        let check = option === 'setDirect' ? this.checkKeyCode(e.keyCode) && e.keyCode !== this.directN : this.checkKeyCode(e.keyCode);
+
+        if (check) {
             switch (e.keyCode) {
                 case 37:
                     this.direct = 'LEFT';
@@ -176,6 +204,14 @@ class Game {
                     break;
             };
         }
+
+        return option === 'rerun' && check == true;
+    }
+
+    // check keycode to set direct
+    checkKeyCode(keyCode) {
+        return ((keyCode === 37 && this.directN !== 39) | (keyCode === 39 && this.directN !== 37) |
+            (keyCode === 38 && this.directN !== 40) | (keyCode === 40 && this.directN !== 38));
     }
 
     moveSnake() {
