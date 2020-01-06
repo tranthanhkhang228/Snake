@@ -1,7 +1,7 @@
 import { Snake } from './snake_module/snake.js';
 import { Bait } from './modules/bait.js';
 import { Game } from './modules/game.js';
-
+import { createCourt } from './modules/util.js';
 
 
 /* 
@@ -70,31 +70,6 @@ const setFirstDirect = (e) => {
         game.start();
     }
 };
-
-
-
-/* create game's court */
-const createCourt = () => {
-    let canvas = document.getElementById('game-frame__court'); // game frame wall and court
-    let context = canvas.getContext('2d');
-    let j = 0, k = 0;
-    for (let i = 0; i <= 480; i += 20) {
-        if (i % 40 == 0) {
-            j = 0;
-            k = 480;
-        } else {
-            j = 20;
-            k = 460;
-        }
-
-        for (j; j <= k; j += 40) {
-            context.beginPath();
-            context.rect(j, i, 20, 20);
-            context.fillStyle = '#a2d149';
-            context.fill();
-        }
-    }
-}
 
 
 
